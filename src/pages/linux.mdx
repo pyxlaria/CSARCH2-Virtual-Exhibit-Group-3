@@ -1,163 +1,100 @@
 ---
 layout: '../layouts/ExhibitLayout.astro'
 title: "Linux Distros"
-author: "Surname, Firstname; Surname2, Firstname2"
-readingTime: "67 minutes"
+author: "Lim, Ethan Yuric; "
+readingTime: "NULL minutes"
 ---
 
- {/* We import various Astro and React components */}
+import Timeline from "../components/Timeline.jsx";
+import "../styles/timeline.css";
+import tux from "../assets/Tux.png";
+import windows from "../assets/windows_1.jpg";
 
-import TextWithImage from "../components/TextWithImage.astro"
-
-import ImageGallery from '../components/ImageGallery.jsx';
-import DistroQuiz from "../components/DistroQuiz.jsx"
-
-{/* Images have to be imported manually */}
-
-import cachyos from "../assets/CachyOS.png"
-import debian from "../assets/Debian.png"
-import endeavour from "../assets/Endeavour.png"
-import fedora from "../assets/Fedora.png"
-import manjaro from "../assets/Manjaro.png"
-import mint from "../assets/Mint.png"
-import mxlinux from "../assets/MX-Linux.png"
-import popos from "../assets/PopOS.png"
-import ubuntu from "../assets/Ubuntu.png"
-import zorin from "../assets/Zorin.png"
-import tux from "../assets/Tux.png"
-
-{/* Used for the ImageGallery component */}
-
-export const photos = [
+export const timelineNodes = [
   {
     id: 1,
-    title: "Debian",
-    tagline: "The universal operating system",
-    author: "Ian Murdock",
-    year: 1993,
-    img: debian.src,
-    url: "https://www.debian.org",
+    size: "large",
+    title: "Placeholder 1",
+    summary: "Lorem Ipsum Dolor",
+    imageSrc: windows.src,
+    imageAlt: "windows 1 logo",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 2,
-    title: "Fedora",
-    tagline: "Freedom. Friends. Features. First.",
-    author: "Fedora Project (Red Hat)",
-    year: 2003,
-    img: fedora.src,
-    url: "https://fedoraproject.org",
+    size: "small",
+    title: "Placeholder 2",
+    summary: "Lorem Ipsum Dolor",
+    imageSrc: windows.src,
+    imageAlt: "windows 1 logo",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 3,
-    title: "Ubuntu",
-    tagline: "Linux for human beings",
-    author: "Canonical Ltd.",
-    year: 2004,
-    img: ubuntu.src,
-    url: "https://ubuntu.com",
+    size: "medium",
+    title: "Placeholder 3",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id risus eget mi iaculis bibendum vel ut libero. Donec dignissim. ",
+    imageSrc: windows.src,
+    imageAlt: "windows 1 logo",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 4,
-    title: "Linux Mint",
-    tagline: "From freedom came elegance",
-    author: "Clément Lefèbvre",
-    year: 2006,
-    img: mint.src,
-    url: "https://linuxmint.com",
+    size: "small",
+    title: "Placeholder 4",
+    summary: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id risus eget mi iaculis bibendum vel ut libero. Donec dignissim. ",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 5,
-    title: "Zorin OS",
-    tagline: "Make your computer better",
-    author: "Artyom & Kyrill Zorin",
-    year: 2009,
-    img: zorin.src,
-    url: "https://zorin.com/os/",
+    size: "large",
+    title: "Placeholder 5",
+    summary: "Lorem Ipsum Dolor",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 6,
-    title: "Manjaro",
-    tagline: "Enjoy the simplicity",
-    author: "Manjaro GmbH & Co. KG",
-    year: 2011,
-    img: manjaro.src,
-    url: "https://manjaro.org",
+    size: "medium",
+    title: "Placeholder 6",
+    summary: "Lorem Ipsum Dolor",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 7,
-    title: "MX Linux",
-    tagline: "Simple, stable, and lightweight",
-    author: "antiX & former MEPIS communities",
-    year: 2014,
-    img: mxlinux.src,
-    url: "https://mxlinux.org",
+    size: "small",
+    title: "Placeholder 7",
+    summary: "Lorem Ipsum Dolor",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 8,
-    title: "Pop!_OS",
-    tagline: "You're in Control",
-    author: "System76",
-    year: 2017,
-    img: popos.src,
-    url: "https://pop.system76.com",
+    size: "large",
+    title: "Placeholder 8",
+    summary: "Lorem Ipsum Dolor",
+    content:
+      "Placeholder text: Add your description here",
   },
   {
     id: 9,
-    title: "EndeavourOS",
-    tagline: "Start your Endeavour",
-    author: "EndeavourOS Team",
-    year: 2019,
-    img: endeavour.src,
-    url: "https://endeavouros.com",
-  },
-  {
-    id: 10,
-    title: "CachyOS",
-    tagline: "Performance-First Linux",
-    author: "Peter Jung",
-    year: 2021,
-    img: cachyos.src,
-    url: "https://cachyos.org",
+    size: "medium",
+    title: "Image Dot Node",
+    summary: "This node uses an image on the timeline dot.",
+    imageSrc: tux.src,
+    imageAlt: "Tux mascot on timeline node",
+    content:
+      "lorem ipsum dolor",
   },
 ];
 
-{/* Actual content */}
+# Linux Distribution Timeline
 
-# Introduction to Linux Distributions
+Tap any node in the centered timeline to open its expandable overlay.
 
-<TextWithImage
-  body="Linux is a free and open-source operating system (OS). Whereas Microsoft's Windows and Apple's MacOS are proprietary, consumer-oriented products, Linux is a system that you truly own. Its [source code is available online](https://github.com/torvalds/linux), and due to this, anyone can take the code, modify it, and redistribute it freely."
-  imageSrc={tux.src}
-  imageAlt="Image of Tux, the Linux mascot"
-  imageCaption="Tux, the Linux mascot"
-/>
-
-*(The above is an example of a custom Astro component, \<TextWithImage>, which simply places some text beside an image. [Astro components](https://docs.astro.build/en/basics/astro-components/) are meant to provide reusable HTML templates for layouting content. Check the source code of the various components to learn more about creating them -- and if you're reading this from your IDE, run the dev server via `npm run dev` to see it render live!)*
-
-## Various Modern Linux Distributions
-
-<ImageGallery photos={photos} client:load />
-
-*(This \<ImageGallery> is an example of a custom React component. React components provide more interactivity than Astro components, and can keep track of state.)*
-
-Nothing is stopping anyone from building their own "version" of Linux, but there are deeper reasons why people add on to the ever-growing pile of distros. Each one of these distros exist to solve **different problems**, such as in Debian's focus on stability going against the Arch-based distros' focus on cutting-edge software. Distros can also express **different philosophies: Fedora ships with only 100% free and open-source software out-of-the-box, while other distros, such as Ubuntu, may prioritize convenience and include proprietary drivers out of the box. The open-source nature of Linux also makes for a very **easy ecosystem** to derive from other existing distros, similar to how Manjaro built on top of Arch to provide a more user-friendly way to benefit from its rolling release model by including a pre-installed desktop environment.
-
-## Distro Chooser
-
-Want to see which distro fits you the best? If you're new to Linux or are thinking of switching from another distro, try out the following Distro Quiz!
-
-<DistroQuiz client:load />
-
-*(This \<DistroQuiz> is an example of a slightly more involved React component.)*
-
-Note that we expect a more involved output -- a real submission on Linux distros could, for example:
-
-- elaborate on each distro
-- highlight the differences between the distros' package managers and their commands
-- implement a terminal emulator sandbox that lets you input basic commands
-- implement something that shows the differences between a fixed-release and rolling-release model
-
-## References
-
-- Distro images retrieved from https://www.tecmint.com/top-most-popular-linux-distributions/
-- Tux image retrieved from https://en.wikipedia.org/wiki/Tux_(mascot)#/media/File:Tux.svg
+<Timeline nodes={timelineNodes} client:load />
