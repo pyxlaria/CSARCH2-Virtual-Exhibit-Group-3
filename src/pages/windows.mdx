@@ -1,0 +1,140 @@
+---
+layout: '../layouts/ExhibitLayout.astro'
+title: "Evolution of Windows OS"
+description: "The virtual exhibit presents the evolution of the Windows OS (from Windows 1 to Windows 11) through an interactive timeline and a quiz."
+author: "Diego, Miguel; Gonzales, Ethan Yuric; Lim, Ethan Yuric; Tan, Mynt; Tiangson, Ezekiel"
+readingTime: "NULL minutes"
+---
+
+import Timeline from "../components/Timeline.jsx";
+import DistroQuiz from "../components/DistroQuiz.jsx";
+import "../styles/timeline.css";
+import tux from "../assets/Tux.png"; /* You can remove this if no longer needed */
+import windows from "../assets/windows_1.jpg";
+
+export const timelineNodes = [
+  {
+    id: 1,
+    size: "large",
+    title: "Windows 1.0 (1985)",
+    imageSrc: tux.src,
+    imageAlt: "Windows 1.0 logo",
+    content: "Windows 1.0 description goes here. <br/><br/> <img src='\Users\MyPC\Desktop\testing\CSARCH2-Virtual-Exhibit-Group-3\src\assets\Endeavour.png' alt='Windows 1.0 UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 2,
+    size: "small",
+    title: "Windows 2.0 (1987)",
+    imageSrc: windows.src,
+    imageAlt: "Windows 2 logo",
+    content: "Windows 2 description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/win2-ui.jpg' alt='Windows 2 UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 3,
+    size: "medium",
+    title: "Windows 3.0 / 3.1 (1990 / 1992)",
+    imageSrc: windows.src,
+    imageAlt: "Windows 3 logo",
+    content: "Windows 3/3.1 description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/win3-ui.jpg' alt='Windows 3 UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 4,
+    size: "small",
+    title: "Windows 95 (1995)",
+    imageSrc: windows.src,
+    imageAlt: "Windows 95 logo",
+    content: "Windows 95 description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/win95-ui.jpg' alt='Windows 95 UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 5,
+    size: "large",
+    title: "Windows 98 (1998)",
+    imageSrc: windows.src,
+    imageAlt: "Windows 98 logo",
+    content: "Windows 98 description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/win98-ui.jpg' alt='Windows 98 UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 6,
+    size: "medium",
+    title: "Windows 2000 (2000)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 7,
+    size: "small",
+    title: "Windows Me (2000)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 8,
+    size: "large",
+    title: "Windows XP (2001)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 9,
+    size: "medium",
+    title: "Windows Vista (2007)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 10,
+    size: "large",
+    title: "Windows 7 (2009)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 11,
+    size: "medium",
+    title: "Windows 8 (2012)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 12,
+    size: "small",
+    title: "Windows 8.1 (2013)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 13,
+    size: "large",
+    title: "Windows 10 (2015)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  },
+  {
+    id: 14,
+    size: "medium",
+    title: "Windows 11 (2021)",
+    imageSrc: windows.src,
+    imageAlt: "Windows logo",
+    content: "Description goes here. <br/><br/> <img src='/path-to-your-ui-snapshot/placeholder-ui.jpg' alt='UI Snapshot' style='max-width:100%; border-radius:8px;' />",
+  }
+];
+
+## Windows OS Timeline
+
+Tap any node in the centered timeline to open its expandable overlay.
+
+<Timeline nodes={timelineNodes} client:load />
+
+## Interactive Quiz
+
+Test your knowledge on the evolution of the Windows Operating System!
+
+<DistroQuiz client:load />
