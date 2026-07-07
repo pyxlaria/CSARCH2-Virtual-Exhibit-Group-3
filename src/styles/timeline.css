@@ -23,9 +23,9 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 8px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #5076a7, #6f8db6);
+  background: linear-gradient(180deg, #0078D4, #5BA4E5, #0078D4);
 }
 
 .timeline-item {
@@ -41,12 +41,18 @@
 
 .timeline-summary {
   max-width: 300px;
-  background: #f4f7fb;
-  border: 1px solid;
+  background: linear-gradient(180deg, #ffffff, #eef4fb);
+  border:  1px solid #9eb7d4;
   border-color: #acafb3;
   border-radius: 12px;
   padding: 0.75rem 0.85rem;
-  box-shadow: 4px 4px 0 rgba(30, 30, 30, 0.12);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.timeline-summary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(0,0,0,.18);
 }
 
 .timeline-summary p {
@@ -94,7 +100,9 @@
   background: radial-gradient(circle at 30% 30%, #ffffff, #9fb5d1);
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .timeline-node__dot--with-image {
@@ -106,12 +114,34 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: inherit;
+  transition:
+  transform .25s ease,  
+  filter .25s ease;
+}
+
+.timeline-node:hover .timeline-node__img {
+    transform: scale(1.08);
+    filter: brightness(1.08);
+}
+
+.timeline-node {
+    z-index: 5;
+}
+
+.timeline-node:hover {
+    z-index: 20;
+}
+
+.timeline-node:hover .timeline-node__img{
+    transform: scale(1.05);
+    filter: brightness(1.05);
 }
 
 .timeline-node:hover .timeline-node__dot,
 .timeline-node:focus-visible .timeline-node__dot {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.26);
+  transform: translateY(-3px) scale(1.25);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.30);
 }
 
 .timeline-node:focus-visible {
@@ -166,7 +196,7 @@
   max-height: min(88vh, 760px);
   display: flex;
   flex-direction: column;
-  background: #ffffff;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
   border-radius: 14px;
   border: 1px solid #c7d2df;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.32);
