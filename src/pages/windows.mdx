@@ -1,0 +1,150 @@
+---
+layout: '../layouts/ExhibitLayout.astro'
+title: "Evolution of Windows OS"
+description: "The virtual exhibit presents the evolution of the Windows OS (from Windows 1 to Windows 11) through an interactive timeline and a quiz."
+author: "Diego, Miguel; Gonzales, Ulrich; Lim, Ethan Yuric; Tan, Mynt; Tiangson, Ezekiel"
+readingTime: "NULL minutes"
+---
+
+import Timeline from "../components/Timeline.jsx";
+import DistroQuiz from "../components/DistroQuiz.jsx";
+import "../styles/timeline.css";
+import windows1 from "../assets/Windows1.jpg";
+import windows3 from "../assets/Windows3.jpg";
+import windows95 from "../assets/Windows95.png";
+import windows2000 from "../assets/Windows2000.png";
+import windowsme from "../assets/Windowsme.png";
+import windowsxp from "../assets/Windowsxp.png";
+import windowsvista from "../assets/Windowsvista.png";
+import windows7 from "../assets/Windows7.png";
+import windows8 from "../assets/Windows8.png";
+import windows10 from "../assets/Windows10.png";
+import windows11 from "../assets/Windows11.png";
+
+
+export const timelineNodes = [
+  {
+    id: 1,
+    size: "large",
+    title: "Windows 1.0 (1985)",
+    imageSrc: windows1.src,
+    imageAlt: "Windows 1.0 logo",
+    content: "Windows 1.0 was Microsoft’s first venture into creating Graphic User Interfaces or (GUIs). Existing operating systems (like MS-DOS, a text-based operating system by Microsoft) required users to make use of and memorize various text commands in order to function properly. This severely limited the accessibility of operating systems at the time and made accessing computers a much more difficult task than it should have been. When Windows 1.0 was released, its design included many features that are still used in modern operating systems today such as overlapping windows, icons, and pull-down menus. It also was built over MS-DOS which in turn allowed already existing users to interface with a familiar environment as they slowly get used to the new operating system and accompanying GUI elements. Despite this initial success and enthusiasm for the new system, there were still many things holding it back such as the market’s hesitance to adopt it over exiting systems due to familiarity concerns and that existing systems were not compatible with Windows 1.0 as developers and users needed to invest new hardware and software to support the new windows operating system.",
+  },
+  {
+    id: 2,
+    size: "large",
+    title: "Windows 2.0 (1987)",
+    imageSrc: windows1.src,
+    imageAlt: "Windows 2 logo",
+    content: "Windows 2.0 introduced several major improvements over Windows 1.0, making the operating environment more practical and user-friendly. It added overlapping and resizeable windows, allowing users to work with multiple applications more efficiently, along with the well known minimize and maximize buttons that are still used in windows today. The release also brought improved graphics with support for 16-color VGA displays, better performance on intel 286 and 386 processors, and support for graphical versions of Microsoft Word and Microsoft Excel. These enhancements made Windows more capable and laid the foundation for many features found in modern versions of WIndows. However, Windows 2.0 still had its limitations. It relied on MS-DOS to run, had a relatively small library of native windows applications, and did not achieve widespread commercial success. Additionally, its overlapping window design led to a legal dispute with Apple over similarities to the Macintosh graphical interface.",
+  },
+  {
+    id: 3,
+    size: "large",
+    title: "Windows 3.0 / 3.1 (1990 / 1992)",
+    imageSrc: windows3.src,
+    imageAlt: "Windows 3 logo",
+    content: "Windows 3.0 was a major improvement over Windows 2.0 and became the first version of Windows to achieve widespread commercial success. It introduced the Program Manager and File Manager, replacing the older MS-DOS Executive, and included a redesigned File Manager, improved hardware detection during installation, richer colored icons, integrated multimedia support, and an expanded Control Panel. Windows 3.1 also introduced TrueType fonts for high-quality scalable text, Object Linking and Embedding (OLE) for better communication between applications, and a new hypertext Help system, making the operating environment more user-friendly and productive. Despite these advancements, Windows 3.1 still depended on MS-DOS to operate, required at least an Intel 80286 processor because it no longer supported real mode, and remained a 16-bit operating environment with limited memory management compared to later 32-bit versions of Windows.",
+  },
+  {
+    id: 4,
+    size: "large",
+    title: "Windows 95 (1995)",
+    imageSrc: windows95.src,
+    imageAlt: "Windows 95 logo",
+    content: "Windows 95 introduced a more user-friendly graphical interface and many features that remain a standard in Windows today. It introduced the start menu, Taskbar, and Windows Explorer, making it much easier for users to navigate files and launch applications. Windows 95 also added plug and play support, allowing hardware such as printers and scanners to be detected and configured automatically, long with support for long file names, improved multitasking, and built-in TCP/IP networking for internet connectivity. These innovations made computers more accessible to both home and business owners. However Windows 95 still relied partly on MS-DOS , lacked the security features of modern operating systems, and had limited support.",
+  },
+  {
+    id: 5,
+    size: "large",
+    title: "Windows 98 (1998)",
+    imageSrc: windows95.src,
+    imageAlt: "Windows 98 logo",
+    content: "Windows 98 built upon the success of Windows 95 by improving performance, hardware compatibility, and Internet integration. It introduced better USB and Plug and Play support, making it easier to connect peripherals such as printers, scanners, and storage devices. The operating system also featured faster startup and shutdown times, improved memory management, Windows Update, Disk Cleanup, and stronger multimedia support for games and digital media. Windows 98 Second Edition (SE) further enhanced stability by adding Internet Connection Sharing (ICS), improved USB support, FireWire compatibility, Internet Explorer 5.0, and numerous bug fixes. However, Windows 98 still relied on the MS-DOS-based Windows 9x architecture, making it less stable than later Windows NT-based systems. It was also more vulnerable to system crashes caused by driver conflicts and lacked the security, memory protection, and reliability found in newer versions of Windows.",
+  },
+  {
+    id: 6,
+    size: "large",
+    title: "Windows 2000 (2000)",
+    imageSrc: windows2000.src,
+    imageAlt: "Windows logo",
+    content: "Windows 2000 was a major step forward from the Windows 9x series because it was built entirely on the Windows NT architecture, making it significantly more stable, secure, and reliable for business and professional users. Released on February 17, 2000, it introduced improved hardware support through the Hardware Abstraction Layer (HAL), better memory management, Plug and Play enhancements, NTFS 3.0, Active Directory support for enterprise networks, and stronger security features such as driver signing. These improvements greatly reduced system crashes compared to Windows 98 and made Windows 2000 a popular choice for corporate environments. However, Windows 2000 still had some limitations. It was designed primarily for businesses rather than home users, lacked many consumer-oriented multimedia features, required more powerful hardware than previous Windows versions, and eventually became outdated as newer operating systems introduced improved security, broader hardware compatibility, and enhanced user features. ",
+  },
+  {
+    id: 7,
+    size: "large",
+    title: "Windows Me (2000)",
+    imageSrc: windowsme.src,
+    imageAlt: "Windows logo",
+    content: "Windows Millennium Edition (Windows ME), released in 2000, introduced several new features at improving the home computing experience. It added system restore, allowing users to recover their system after software of driver problems, along with system file protection to help prevent important files from being overwritten. Windows ME also improved support for digital media and home entertainment by including Windows Movie Maker, Windows Media Player 7, and enhanced USB and networking capabilities. In addition, it was the first version of Windows to remove real-mode MS-DOS during startup, resulting in faster boot times and a more modern operating environment. However Windows ME became known for its instability, with many users experiencing frequent crashes, driver compatibility issues, and software conflicts. ",
+  },
+  {
+    id: 8,
+    size: "large",
+    title: "Windows XP (2001)",
+    imageSrc: windowsxp.src,
+    imageAlt: "Windows logo",
+    content: "Windows XP was mainly an update that focused on replacing the unstable, consumer-grade Windows Me by unifying home and business users under a reengineered platform. It dramatically changed the interface by replacing the rigid corporate gray menus with a colorful layout featuring the iconic “Bliss” green hill wallpaper and rounded visual buttons",
+  },
+  {
+    id: 9,
+    size: "large",
+    title: "Windows Vista (2007)",
+    imageSrc: windowsvista.src,
+    imageAlt: "Windows logo",
+    content: "Windows Vista is a major release of the Microsoft Windows NT operating system released to the public on January 30, 2007. As the successor to Windows XP, it introduced a major overhaul in aesthetic design (the Windows Aero interface) and core security architectures before being replaced by Windows 7. A couple of the prominent key features, designs, and visual details that were involved in this are the Windows Aero Glass (Vista abandoned solid colors for a premium, translucent glass aesthetic) and the System-Wide Audio Overhaul (Vista introduced an entirely rewritten audio stack. For the first time, users could adjust the volume levels of individual applications independently using a master volume mixer). Vista in its own right was a critical building block for modern Windows. It introduced the foundational technologies like the Windows Display Driver Manager (WDDM), BitLocker, and User Account Control (UAC). The OS officially reached its End of Life on April 11, 2017.",
+  },
+  {
+    id: 10,
+    size: "large",
+    title: "Windows 7 (2009)",
+    imageSrc: windows7.src,
+    imageAlt: "Windows logo",
+    content: "Windows 7 was designed to fix performance, stability, and speed issues found in Windows Vista. An introduction to modern interface improvements such as the taskbar app pinning and window snapping (Aero Snap) were implemented in this version.",
+  },
+  {
+    id: 11,
+    size: "large",
+    title: "Windows 8 (2012)",
+    imageSrc: windows8.src,
+    imageAlt: "Windows logo",
+    content: "Windows 8 was designed as a touch-centric system to compete with mobile tablet operating systems and introduced a major interface overhaul by removing the classic start menu in favor of a full screen, tile-based “start screen”.",
+  },
+  {
+    id: 12,
+    size: "large",
+    title: "Windows 8.1 (2013)",
+    imageSrc: windows8.src,
+    imageAlt: "Windows logo",
+    content: "Windows 8.1 was designed as a rapid response system to address user backlash and criticisms of the previous version. The start button was returned and allowed users to boot directly to the traditional desktop.",
+  },
+  {
+    id: 13,
+    size: "large",
+    title: "Windows 10 (2015)",
+    imageSrc: windows10.src,
+    imageAlt: "Windows logo",
+    content: "Windows 10 was designed to unify the user experience across multiple device ecosystems like PCs, tablets and smartphones after the severe backlash to Windows 8. To achieve this, it reintroduced the classic, familiar style start menu but merged it with the live tiles format popular in modern applications.",
+  },
+  {
+    id: 14,
+    size: "large",
+    title: "Windows 11 (2021)",
+    imageSrc: windows11.src,
+    imageAlt: "Windows logo",
+    content: "Windows 11 was mainly an update intended to modernize the interface and strengthen platform security. It changed the core look by centering the start menu and taskbar on the screen while introducing visual upgrades such as streamlined Snap Layouts. However, interface customization suffered a severe hit due to initially restricted taskbar adjustments, and device compatibility suffered due to strict hardware and TPM 2.0 system mandates that lock out older, functional computers.",
+  }
+];
+
+## Windows OS Timeline
+
+Tap any node in the centered timeline to open its expandable overlay.
+
+<Timeline nodes={timelineNodes} client:load />
+
+## Interactive Quiz
+
+Test your knowledge on the evolution of the Windows Operating System!
+
+<DistroQuiz client:load />
