@@ -27,7 +27,7 @@ We wanted the timeline to be easy to read and mobile-friendly. While the design 
 
 # Things To Be Done In The Final Submission
 
-Given that the project in its entirety is still in its middle phase, a couple of noteworthy things to be done in and for the final submission include but are not limited to; theme finalization (from background color scheme, image layouts, and more), debugging of the needed functionalities (It’s still in its middle phase so there still might be some bugs or errors to be encountered along the way), polishing the front end all in all (this include text formatting, button animation, and more). An important missing piece for the project is the project ui images, which will be added in the final output as well as the lengthening some definitions.
+Given that the project in its entirety is still in its middle phase, a couple of noteworthy things to be done in and for the final submission include but are not limited to; theme finalization (from background color scheme, image layouts, and more), debugging of the needed functionalities (It’s still in its middle phase so there still might be some bugs or errors to be encountered along the way), polishing the front end all in all (this include text formatting, button animation, and more). An important missing piece for the project is the specific Windows ui images for visual aid, which will be added in the final output as well as the lengthening some definitions.
 
 # AI Tool(s) Used
 
