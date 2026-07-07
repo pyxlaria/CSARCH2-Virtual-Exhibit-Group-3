@@ -1,164 +1,108 @@
 /**
  * DistroQuiz.jsx
  *
- * An interactive, modern "Which Windows version fits you?" quiz. 
- * Optimized with performance animations and separate CSS configuration hooks.
+ * An interactive Windows evolution trivia quiz.
+ * Higher total scores unlock stronger result titles.
  */
 
 import { useState } from "react";
 import "../styles/quiz.css";
 
-// -- Complete Original Quiz Data Archetype --------------------------------------------
 const questions = [
   {
-    text: "How do you feel about computing nostalgia?",
+    text: "When was Windows 1.0 released?",
     options: [
-      { id: "retro", label: "Pure nostalgia", desc: "Chunky icons, dial-up sounds, the whole 90s vibe" },
-      { id: "fond", label: "A little nostalgic", desc: "I remember XP fondly, but I don't need it back" },
-      { id: "modern", label: "Mostly modern", desc: "I like new things, but I still want it to feel familiar" },
-      { id: "cutting", label: "Give me the newest", desc: "I want whatever Microsoft ships today" },
+      { id: "win1-1983", label: "1983", points: 0 },
+      { id: "win1-1985", label: "1985", points: 2 },
+      { id: "win1-1988", label: "1988", points: 0 },
+      { id: "win1-1990", label: "1990", points: 0 },
     ],
   },
   {
-    text: "What do you value most in an OS?",
+    text: "Which Windows release introduced the Start menu and taskbar to the mainstream?",
     options: [
-      { id: "stability", label: "Rock-solid stability", desc: "I want it to just work, always" },
-      { id: "looks", label: "Fresh, modern visuals", desc: "Glass effects, rounded corners, eye candy" },
-      { id: "control", label: "Control and customization", desc: "Deep settings, no hand-holding" },
-      { id: "simplicity", label: "Simplicity", desc: "Turn it on and go" },
+      { id: "start-31", label: "Windows 3.1", points: 0 },
+      { id: "start-95", label: "Windows 95", points: 2 },
+      { id: "start-98", label: "Windows 98", points: 0 },
+      { id: "start-xp", label: "Windows XP", points: 0 },
     ],
   },
   {
-    text: "How do you feel about big UI redesigns?",
+    text: "Which feature was introduced in the development and release of Windows 3.0?",
     options: [
-      { id: "resist", label: "Please don't move my Start menu", desc: "Keep things exactly where I left them" },
-      { id: "cautious", label: "I'll adjust, eventually", desc: "Give me a minute to complain first" },
-      { id: "curious", label: "I like seeing what's new", desc: "Redesigns keep things interesting" },
-      { id: "embrace", label: "Bring on the overhaul", desc: "Rebuild it from scratch, I'm in" },
+      { id: "feature-pnp", label: "Plug and Play enhancements", points: 0 },
+      { id: "feature-wmm", label: "Windows Movie Maker", points: 0 },
+      { id: "feature-dc", label: "Disk Cleanup", points: 0 },
+      { id: "feature-fm", label: "File Manager", points: 2 },
     ],
   },
   {
-    text: "What will you mainly use it for?",
+    text: "Which Windows release replaced the classic Start menu with a tile-based Start screen?",
     options: [
-      { id: "everyday", label: "Everyday use", desc: "Browsing, office work, media" },
-      { id: "gaming", label: "Gaming", desc: "DirectX, frame rates, the Game Bar" },
-      { id: "dev", label: "Development", desc: "IDEs, terminals, WSL" },
-      { id: "office", label: "Office & business", desc: "Domains, spreadsheets, meetings" },
+      { id: "tiles-vista", label: "Windows Vista", points: 0 },
+      { id: "tiles-7", label: "Windows 7", points: 0 },
+      { id: "tiles-8", label: "Windows 8", points: 2 },
+      { id: "tiles-10", label: "Windows 10", points: 0 },
     ],
   },
   {
-    text: "How often do you want big feature updates?",
+    text: "Which version was designed to unify the user experience across multiple devices such as PCs, tablets, and smartphones?",
     options: [
-      { id: "rare", label: "Rarely, if ever", desc: "Set it up once and leave it alone for years" },
-      { id: "periodic", label: "Every few years", desc: "A big redesign now and then keeps it fresh" },
-      { id: "continuous", label: "Constantly, as a service", desc: "Rolling updates, always current" },
+      { id: "unify-7", label: "Windows 7", points: 0 },
+      { id: "unify-8", label: "Windows 8", points: 0 },
+      { id: "unify-10", label: "Windows 10", points: 2 },
+      { id: "unify-11", label: "Windows 11", points: 0 },
     ],
   },
 ];
 
-const distros = {
-  win95: {
-    name: "Windows 95",
-    tagline: "Start me up",
-    year: 1995,
-    color: "#008080",
-    desc: "The release that introduced the Start menu, taskbar, and Plug and Play to the mainstream, launched with a $300 million campaign built around the Rolling Stones' Start Me Up.",
-  },
-  win98: {
-    name: "Windows 98",
-    tagline: "Where do you want to go today?",
-    year: 1998,
-    color: "#5A7EA6",
-    desc: "A refinement of 95 aimed at better hardware support, introducing USB and FAT32 and bundling Internet Explorer -- a decision that fed directly into Microsoft's antitrust case.",
-  },
-  winme: {
-    name: "Windows Me",
-    tagline: "Meet the Millennium Edition nobody asked for",
-    year: 2000,
-    color: "#8A6FBF",
-    desc: "The last Windows built on the aging MS-DOS codebase, rushed out for the 2000 holiday season and remembered mostly for its instability before Windows 2000 replaced it for good.",
-  },
-  win2000: {
-    name: "Windows 2000",
-    tagline: "Built for business, quietly reliable",
-    year: 2000,
-    color: "#274B7A",
-    desc: "An NT-kernel release built strictly for business desktops and servers, bringing Active Directory and Plug and Play to the professional line before XP merged it with consumer Windows.",
-  },
-  winxp: {
-    name: "Windows XP",
-    tagline: "Yes you can",
-    year: 2001,
-    color: "#2A66C8",
-    desc: "The release that finally merged Microsoft's consumer and business lines onto the NT kernel. Its stability made it the longest-running Windows ever, with support lasting nearly 13 years.",
-  },
-  vista: {
-    name: "Windows Vista",
-    tagline: "The Wow starts now",
-    year: 2007,
-    color: "#3E8ED0",
-    desc: "A five-year, multi-billion-dollar rebuild bringing Aero Glass visuals and User Account Control, but its heavy hardware demands and driver issues made it Microsoft's most criticized release.",
-  },
-  win7: {
-    name: "Windows 7",
-    tagline: "Windows 7 was my idea",
-    year: 2009,
-    color: "#3AA0DD",
-    desc: "A faster, more polished follow-up to Vista built on the same foundation. It fixed most of Vista's complaints and became one of the most fondly remembered Windows releases.",
-  },
-  win8: {
-    name: "Windows 8",
-    tagline: "Reimagined for touch",
-    year: 2012,
-    color: "#00ADEF",
-    desc: "A touch-first redesign that replaced the Start menu with a tile-based Start screen. Its steep learning curve on desktop PCs made it one of Windows' most divisive releases.",
-  },
-  win10: {
-    name: "Windows 10",
-    tagline: "The last version of Windows",
-    year: 2015,
-    color: "#0078D6",
-    desc: "Free to upgrade to and pitched as 'Windows as a service' rather than a one-time release, it brought back the Start menu and folded in continuous rolling updates.",
-  },
-  win11: {
-    name: "Windows 11",
-    tagline: "A fresh new look for Windows",
-    year: 2021,
+const scoreTiers = [
+  {
+    minScore: 10,
+    title: "Windows Evolution Master",
+    tagline: "You can trace the platform from tiled windows to centered taskbars.",
     color: "#0067C0",
-    desc: "A visual refresh centered on a redesigned Start menu, centered taskbar, and rounded corners, paired with stricter hardware requirements that left many older PCs unable to upgrade.",
+    desc: "You know the major turning points in Windows history and can place key interface and architecture changes with confidence.",
   },
-};
+  {
+    minScore: 8,
+    title: "Windows Historian",
+    tagline: "You know the major milestones and can identify the key releases.",
+    color: "#007A33",
+    desc: "You have a solid understanding of Windows history, but a few details may still need refreshing.",
+  },
+  {
+    minScore: 6,
+    title: "Release Archivist",
+    tagline: "You know your way around the biggest milestones.",
+    color: "#1F6F8B",
+    desc: "You have a solid grasp of how Windows evolved, even if a few release details still need a refresher.",
+  },
+  {
+    minScore: 4,
+    title: "Windows Enthusiast",
+    tagline: "You know your way around the major releases.",
+    color: "#FF9900",
+    desc: "You have a good understanding of Windows history, but there are still some gaps to fill.",
+  },
+  {
+    minScore: 2,
+    title: "Control Panel Explorer",
+    tagline: "You remember the landmarks, but not every build note.",
+    color: "#4C7A34",
+    desc: "You recognize the headline changes across major versions, and a little more timeline study will push you into expert territory.",
+  },
+  {
+    minScore: 0,
+    title: "Fresh Install",
+    tagline: "Every expert starts with a first boot.",
+    color: "#8A5A2B",
+    desc: "This is a good baseline. Walk the exhibit timeline once more and the next run should score much higher.",
+  },
+];
 
-const scoring = {
-  retro: { win95: 3, win98: 2 },
-  fond: { winxp: 3, win2000: 1, win98: 1 },
-  modern: { win7: 2, win10: 2, win8: 1 },
-  cutting: { win11: 3, win10: 1 },
-  stability: { win2000: 2, win7: 2, winxp: 1, win10: 1 },
-  looks: { vista: 3, win11: 2, win8: 1 },
-  control: { win98: 2, winxp: 2, win7: 1 },
-  simplicity: { win95: 2, win10: 2, win11: 1 },
-  resist: { win95: 2, winxp: 3, win2000: 1 },
-  cautious: { win7: 2, win98: 1, winme: 1 },
-  curious: { vista: 2, win10: 1, win8: 1 },
-  embrace: { win8: 3, win11: 2, vista: 1 },
-  everyday: { winxp: 2, win7: 2, win10: 1 },
-  gaming: { win98: 1, win7: 2, win10: 2, win11: 1 },
-  dev: { win10: 2, win11: 2, win7: 1, winxp: 1 },
-  office: { win2000: 3, winxp: 2, win7: 1 },
-  rare: { winxp: 3, win7: 2, win2000: 1 },
-  periodic: { win98: 2, vista: 1, win8: 1, winme: 1 },
-  continuous: { win10: 3, win11: 2 },
-};
-
-function getResult(answers) {
-  const scores = Object.fromEntries(Object.keys(distros).map((d) => [d, 0]));
-  answers.forEach((a) => {
-    const pts = scoring[a] ?? {};
-    Object.entries(pts).forEach(([d, v]) => { scores[d] += v; });
-  });
-  const winnerKey = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
-  return distros[winnerKey];
+function getResult(totalScore) {
+  return scoreTiers.find((tier) => totalScore >= tier.minScore) ?? scoreTiers[scoreTiers.length - 1];
 }
 
 export default function DistroQuiz() {
@@ -192,13 +136,21 @@ export default function DistroQuiz() {
     setSelected(null);
   }
 
-  const result = isResult ? getResult(answers) : null;
+  const totalScore = answers.reduce((sum, answerId) => {
+    const selectedOption = questions
+      .flatMap((question) => question.options)
+      .find((option) => option.id === answerId);
+
+    return sum + (selectedOption?.points ?? 0);
+  }, 0);
+  const maxScore = questions.length * 2;
+  const result = isResult ? getResult(totalScore) : null;
 
   if (!isOpen) {
     return (
       <div className="quiz-root-wrapper quiz-launcher-container">
         <button className="quiz-btn-primary" onClick={() => setIsOpen(true)}>
-          START
+          START TRIVIA
         </button>
       </div>
     );
@@ -213,9 +165,9 @@ export default function DistroQuiz() {
         {/* -- Screen 1: Intro Pass -- */}
         {isIntro && (
           <div className="quiz-animated-step">
-            <h3 className="quiz-question-heading">Windows Timeline Explorer Quiz</h3>
+            <h3 className="quiz-question-heading">Windows Evolution Trivia</h3>
             <p className="quiz-intro-text">
-              Answer 5 quick questions to find the era of Windows that fits your configuration profile and computing preferences best.
+              Answer 5 quick questions about major Windows releases. Each correct answer adds to your total score and unlocks a stronger title at the end.
             </p>
             <button className="quiz-btn-primary" onClick={() => setStep(1)}>
               Start the quiz →
@@ -269,7 +221,8 @@ export default function DistroQuiz() {
         {/* -- Screen 3: Minimalized Results Panel Pass -- */}
         {isResult && result && (
           <div className="quiz-animated-step">
-            <p className="quiz-result-header-text">Your Recommended Matching Version</p>
+            <p className="quiz-result-header-text">Your Trivia Rank</p>
+            <p className="quiz-step-meta">Score {totalScore} of {maxScore}</p>
             
             <div 
               className="quiz-modern-result-card"
@@ -281,7 +234,7 @@ export default function DistroQuiz() {
                   style={{ background: result.color, boxShadow: `0 0 12px ${result.color}80` }} 
                 />
                 <div>
-                  <div className="quiz-result-main-title">{result.name}</div>
+                  <div className="quiz-result-main-title">{result.title}</div>
                   <div className="quiz-result-sub-tagline">“{result.tagline}”</div>
                 </div>
               </div>
