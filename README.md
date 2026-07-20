@@ -3,6 +3,15 @@ Website link: https://pyxlaria.github.io/CSARCH2-Virtual-Exhibit-Group-3/
 
 ----------
 # Mid-milestone Iteration document
+
+# Project Title: Evolution of Windows OS
+## Members:
+- Lim, Ethan Yuric
+- Gonzales, Ulrich
+- Tiangson, Ezekiel
+- Tan, Mynt
+- Diego, Miguel
+
 # Lessons Learned
 
 Vital communication is key when fixing one another's mistakes. Without it, we found it difficult to work independently because programming clashes in logic and syntax are likely to happen.
