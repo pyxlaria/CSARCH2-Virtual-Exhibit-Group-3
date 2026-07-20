@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Howl } from "howler";
 
 // maps node sizes to CSS values
 const nodeSizes = {
@@ -10,6 +11,7 @@ const nodeSizes = {
 export default function Timeline({ nodes = [] }) {
 // activeId is the id of the currently open node, or null if no node is open
   const [activeId, setActiveId] = useState(null);
+  const soundRef = useRef(null);
 
 // activeNode is the node object corresponding to the activeId, or null if no node is open
   const activeNode = useMemo(
@@ -39,6 +41,56 @@ export default function Timeline({ nodes = [] }) {
     };
   }, [activeNode]);
 
+  // useEffect to clean up the sound when the component unmounts, stops and unloads
+  useEffect(
+    () => () => {
+      soundRef.current?.stop();
+      soundRef.current?.unload();
+      soundRef.current = null;
+    },
+    [],
+  );
+  // function to play the sound of a node
+  // stops and unloads any previous sound before playing the new one
+  function playNodeSound(src) {
+    if (!src) return;
+
+    soundRef.current?.stop();
+    soundRef.current?.unload();
+
+    // creates a new howl instance for the new sound
+    const sound = new Howl({
+      src: [src],
+      html5: true,  
+      preload: true, // preloads the sound to reduce latency
+      onend: () => { // unloads sound when it ends
+        sound.unload();
+        if (soundRef.current === sound) { // clears reference to sound if current sound
+          soundRef.current = null;
+        }
+      },
+      onstop: () => { // unloads sound when it stops
+        sound.unload();
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+      onloaderror: () => { // unloads sound if error when loading
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+      onplayerror: () => { // unloads sound if error when playing
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+    });
+
+    soundRef.current = sound;
+    sound.play();
+  }
+
 
   // renders the actual timeline + nodes + overlay if a node is open
   return (
@@ -64,7 +116,10 @@ export default function Timeline({ nodes = [] }) {
               <button
                 type="button"
                 className={`timeline-node ${sizeClass}`}
-                onClick={() => setActiveId(node.id)}
+                onClick={() => {
+                  playNodeSound(node.soundSrc);
+                  setActiveId(node.id);
+                }}
                 // below are accessibility attributes for nodes that open the overlay.
                 aria-label={`Open details for ${node.title}`}
                 aria-haspopup="overlay"

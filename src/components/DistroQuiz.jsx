@@ -5,8 +5,10 @@
  * Higher total scores unlock stronger result titles.
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Howl } from "howler";
 import "../styles/quiz.css";
+import win95Startup from "../assets/win95.mp3";
 
 const questions = [
   {
@@ -19,7 +21,10 @@ const questions = [
     ],
   },
   {
-    text: "Which Windows release introduced the Start menu and taskbar to the mainstream?",
+    kind: "audio",
+    audioText: "Which Windows version is this startup sound from?",
+    fallbackText: "Which Windows release introduced the Start menu and taskbar to the mainstream?",
+    soundSrc: win95Startup,
     options: [
       { id: "start-31", label: "Windows 3.1", points: 0 },
       { id: "start-95", label: "Windows 95", points: 2 },
@@ -110,30 +115,91 @@ export default function DistroQuiz() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [selected, setSelected] = useState(null);
+  const [showAudioQuestion, setShowAudioQuestion] = useState(true);
+  const soundRef = useRef(null);
 
   const totalQ = questions.length;
   const isIntro = step === 0;
   const isResult = step > totalQ;
   const currentQ = questions[step - 1];
+  const isAudioQuestion = currentQ?.kind === "audio";
+  const questionText = isAudioQuestion && !showAudioQuestion ? currentQ.fallbackText : currentQ?.audioText ?? currentQ?.text;
+
+  useEffect(
+    () => () => {
+      soundRef.current?.stop();
+      soundRef.current?.unload();
+      soundRef.current = null;
+    },
+    [],
+  );
+
+  function stopQuestionSound() {
+    soundRef.current?.stop();
+    soundRef.current?.unload();
+    soundRef.current = null;
+  }
+
+  function playQuestionSound(src) {
+    if (!src) return;
+
+    stopQuestionSound();
+
+    const sound = new Howl({
+      src: [src],
+      html5: true,
+      preload: true,
+      onend: () => {
+        sound.unload();
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+      onstop: () => {
+        sound.unload();
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+      onloaderror: () => {
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+      onplayerror: () => {
+        if (soundRef.current === sound) {
+          soundRef.current = null;
+        }
+      },
+    });
+
+    soundRef.current = sound;
+    sound.play();
+  }
 
   function handleNext() {
     if (!selected) return;
+    stopQuestionSound();
     setAnswers((prev) => [...prev, selected]);
     setSelected(null);
     setStep((s) => s + 1);
   }
 
   function handleClose() {
+    stopQuestionSound();
     setIsOpen(false);
     setStep(0);
     setAnswers([]);
     setSelected(null);
+    setShowAudioQuestion(true);
   }
 
   function handleRestart() {
+    stopQuestionSound();
     setStep(0);
     setAnswers([]);
     setSelected(null);
+    setShowAudioQuestion(true);
   }
 
   const totalScore = answers.reduce((sum, answerId) => {
@@ -188,7 +254,46 @@ export default function DistroQuiz() {
             </div>
 
             <p className="quiz-step-meta">Question {step} of {totalQ}</p>
-            <h3 className="quiz-question-heading">{currentQ.text}</h3>
+            <h3 className="quiz-question-heading">{questionText}</h3>
+
+            {isAudioQuestion && (
+              <div className="quiz-control-row" style={{ marginBottom: "1rem" }}>
+                {showAudioQuestion ? (
+                  <>
+                    <button
+                      type="button"
+                      className="quiz-btn-primary quiz-btn-secondary"
+                      onClick={() => playQuestionSound(currentQ.soundSrc)}
+                    >
+                      Play startup sound
+                    </button>
+                    <button
+                      type="button"
+                      className="quiz-btn-primary quiz-btn-secondary"
+                      onClick={() => {
+                        stopQuestionSound();
+                        setShowAudioQuestion(false);
+                        setSelected(null);
+                      }}
+                    >
+                      Can't listen? Use text question instead
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    className="quiz-btn-primary quiz-btn-secondary"
+                    onClick={() => {
+                      stopQuestionSound();
+                      setShowAudioQuestion(true);
+                      setSelected(null);
+                    }}
+                  >
+                    Use startup sound question
+                  </button>
+                )}
+              </div>
+            )}
 
             <div className="quiz-options-grid">
               {currentQ.options.map((opt) => {
