@@ -1,10 +1,32 @@
 # Final Iteration 
 Website link: https://pyxlaria.github.io/CSARCH2-Virtual-Exhibit-Group-3/
 
+## Project Title: Evolution of Windows OS
+## Members:
+- Lim, Ethan Yuric
+- Gonzales, Ulrich
+- Tiangson, Ezekiel
+- Tan, Mynt
+- Diego, Miguel
+
+# Lessons Learned
+
+
+
+# Challenges
+Implementing Howler.js in our code proved to be a bit of a challenge. While this method was easier than using the base tools that react provided, it still took a bit of time to learn and understand how to make use of this new system. 
+
+Optimization still proves to be a challenge as there are moments on lower-end devices, wherein the website may lag or sometimes be unresponsive. 
+
+# Creative Development
+Building off of our previous iteration, we decided to add the windows startup sound for every major version of Windows OS that we'd like to showcase. We wanted to implement this because the Windows OS startup sound has been such an iconic mainstay in the development and evolution of Windows as a whole. Some sound bytes are even used in modern pop culture today such as the Windows 95 startup sound and the Windows 3.0/3.1 startup sound.
+
+In the quiz section of our exhibit, we also understand that some users may have hearing difficulties, or simply may not have the correct setup or environment to be able to listen to sound being played. In order to counteract this, we decided to implement a backup text-only question for question no.2. This took direct inspiration from the language-learning app duolingo where audio-based questions had the option to be swapped out for text-only questions if the user isn't able to listen to audio at the moment.
+
 ----------
 # Mid-milestone Iteration document
 
-# Project Title: Evolution of Windows OS
+## Project Title: Evolution of Windows OS
 ## Members:
 - Lim, Ethan Yuric
 - Gonzales, Ulrich
