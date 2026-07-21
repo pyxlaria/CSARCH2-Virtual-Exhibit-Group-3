@@ -10,7 +10,7 @@ Website link: https://pyxlaria.github.io/CSARCH2-Virtual-Exhibit-Group-3/
 - Diego, Miguel
 
 # Lessons Learned
-
+The group massively understood the importance of rereading the specs BY A LOT, as one simple misread or misinterpretation can literally send an entire "in the process of building" project downwards by a lot of refactoring and backwards by 2 more weeks of which were crammed into 3 days. Furthermore, clearer communication channels and time periods for ONLY NEEDED meetings have been understood by the group to be crucial in terms of how productive a group can be. As always complacency is heavily punished for a project like this when it comes to time, effort, and mental resource, to which the group in their own respective mistakes over the course of this project have learned repeatedly over and over again. A couple of eureka moments popped here and there such as trying out different layout alternatives in terms of the UI, or how some certain decorative/functional elements were added/changed to improve upon the project's overall theme and whatnot. As always this project would've never been successfully completed without maintaining a sense of adequate accountability towards ourselves and to each other about who contributed what and how much.
 
 
 # Challenges
@@ -22,6 +22,8 @@ Optimization still proves to be a challenge as there are moments on lower-end de
 Building off of our previous iteration, we decided to add the windows startup sound for every major version of Windows OS that we'd like to showcase. We wanted to implement this because the Windows OS startup sound has been such an iconic mainstay in the development and evolution of Windows as a whole. Some sound bytes are even used in modern pop culture today such as the Windows 95 startup sound and the Windows 3.0/3.1 startup sound.
 
 In the quiz section of our exhibit, we also understand that some users may have hearing difficulties, or simply may not have the correct setup or environment to be able to listen to sound being played. In order to counteract this, we decided to implement a backup text-only question for question no.2. This took direct inspiration from the language-learning app duolingo where audio-based questions had the option to be swapped out for text-only questions if the user isn't able to listen to audio at the moment.
+
+We also decided it would be better if we refactored majority of the UI into a different set of layouts, one that includes the timeline being on the sideline (right side) while a window on its left detailing what generally the OS look liked with all the necessary details and whatnot about its history and development and then beneath that is where the window for the prompt of the quiz on windows os is located, all of this to make sure it fits nicely in an overall minimalist aesthetic to make it "easy on the eyes" for the average viewer or in this case user.
 
 ----------
 # Mid-milestone Iteration document
