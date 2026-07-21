@@ -39,8 +39,15 @@ We also decided it would be better if we refactored majority of the UI into a di
 - Assistance in syntax fixing
 - Assistance in code debugging
 - Assistance in in-line documentation
+- Workload Distribution
+- Source finding
+- Citation Making/Formatting
+- Progress Tracking
+- Further assistance on code debugging
 
-Extent of Use: Moderate - used for inspiration, knowledge checks, debugging, and syntax searching.
+Extent of Use: Moderate - used for inspiration, knowledge checks, debugging, syntax searching, feasibility checks, layout suggestion, workload allocation, resource (time and effort in particular) allocation
+
+### Disclaimer: Under no circumstances were code from AI were used in a copy and paste manner, every line of code here originated from the developers first and as such the use of AI in terms of coding was mainly for bug checks, syntax references/fixing, debugging, revisions and others related to this.
 
 ----------
 # Mid-milestone Iteration document
