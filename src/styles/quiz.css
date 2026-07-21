@@ -308,3 +308,88 @@
   border-color: var(--color-text-secondary, #9ca3af);
   box-shadow: none;
 }
+
+/* ── Inline quiz panel styles ── */
+.quiz-inline {
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.quiz-inline .quiz-btn-primary {
+  font-size: 0.85rem;
+  padding: 0.7rem 1.5rem;
+}
+
+.quiz-inline-open {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.quiz-modal-card--inline {
+  position: relative;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  max-width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  padding: 1.25rem;
+  animation: none;
+}
+
+.quiz-modal-card--inline .quiz-question-heading {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-modal-card--inline .quiz-options-grid {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.quiz-modal-card--inline .quiz-option-card {
+  padding: 0.7rem 0.9rem;
+}
+
+.quiz-modal-card--inline .quiz-option-card-title {
+  font-size: 0.85rem;
+}
+
+.quiz-modal-card--inline .quiz-btn-primary {
+  font-size: 0.82rem;
+  padding: 0.6rem 1.2rem;
+}
+
+.quiz-modal-card--inline .quiz-close-x {
+  top: 8px;
+  right: 10px;
+  font-size: 18px;
+}
+
+.quiz-modal-card--inline .quiz-progress-track {
+  margin-bottom: 1rem;
+}
+
+.quiz-modal-card--inline .quiz-intro-text {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-modal-card--inline .quiz-modern-result-card {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-modal-card--inline .quiz-result-main-title {
+  font-size: 1.2rem;
+}
+
+.quiz-modal-card--inline .quiz-control-row {
+  flex-direction: column;
+  gap: 6px;
+}
