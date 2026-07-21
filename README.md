@@ -25,6 +25,23 @@ In the quiz section of our exhibit, we also understand that some users may have 
 
 We also decided it would be better if we refactored majority of the UI into a different set of layouts, one that includes the timeline being on the sideline (right side) while a window on its left detailing what generally the OS look liked with all the necessary details and whatnot about its history and development and then beneath that is where the window for the prompt of the quiz on windows os is located, all of this to make sure it fits nicely in an overall minimalist aesthetic to make it "easy on the eyes" for the average viewer or in this case user.
 
+# AI Tool(s) Used
+
+- Gemini
+- ChatGPT
+
+## How AI Tool(s) Were Used
+
+- Idea polishing
+- Idea compartmentalization
+- Formatting
+- Syntax library generation
+- Assistance in syntax fixing
+- Assistance in code debugging
+- Assistance in in-line documentation
+
+Extent of Use: Moderate - used for inspiration, knowledge checks, debugging, and syntax searching.
+
 ----------
 # Mid-milestone Iteration document
 
