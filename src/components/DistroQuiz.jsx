@@ -6,6 +6,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Howl } from "howler";
 import "../styles/quiz.css";
 import win95Startup from "../assets/win95.mp3";
@@ -111,7 +112,6 @@ function getResult(totalScore) {
 }
 
 export default function DistroQuiz() {
-  const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -187,7 +187,6 @@ export default function DistroQuiz() {
 
   function handleClose() {
     stopQuestionSound();
-    setIsOpen(false);
     setStep(0);
     setAnswers([]);
     setSelected(null);
@@ -212,24 +211,10 @@ export default function DistroQuiz() {
   const maxScore = questions.length * 2;
   const result = isResult ? getResult(totalScore) : null;
 
-  if (!isOpen) {
+  if (isIntro) {
     return (
-      <div className="quiz-root-wrapper quiz-launcher-container">
-        <button className="quiz-btn-primary" onClick={() => setIsOpen(true)}>
-          START TRIVIA
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="quiz-root-wrapper quiz-overlay-backdrop" onClick={handleClose}>
-      <div className="quiz-modal-card" onClick={(e) => e.stopPropagation()}>
-        
-        <button className="quiz-close-x" onClick={handleClose} aria-label="Close quiz">×</button>
-
-        {/* -- Screen 1: Intro Pass -- */}
-        {isIntro && (
+      <div className="quiz-root-wrapper quiz-inline">
+        <div className="quiz-modal-card--inline">
           <div className="quiz-animated-step">
             <h3 className="quiz-question-heading">Windows Evolution Trivia</h3>
             <p className="quiz-intro-text">
@@ -239,7 +224,16 @@ export default function DistroQuiz() {
               Start the quiz →
             </button>
           </div>
-        )}
+        </div>
+      </div>
+    );
+  }
+
+  const quizOverlay = (
+    <div className="quiz-root-wrapper quiz-overlay-backdrop" onClick={handleClose}>
+      <div className="quiz-modal-card" onClick={(e) => e.stopPropagation()}>
+        
+        <button className="quiz-close-x" onClick={handleClose} aria-label="Close quiz">×</button>
 
         {/* -- Screen 2: Active Question Pass -- */}
         {!isIntro && !isResult && currentQ && (
@@ -361,4 +355,6 @@ export default function DistroQuiz() {
       </div>
     </div>
   );
+
+  return typeof document !== "undefined" ? createPortal(quizOverlay, document.body) : null;
 }
